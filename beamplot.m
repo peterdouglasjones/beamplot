@@ -312,12 +312,18 @@ classdef beamplot < matlab.apps.AppBase
             if isempty(parentfolder);
                 [filename, pathname] = uigetfile('*.*', 'Select Plot File', 'MultiSelect', 'off');
                 idcs = strfind(pathname,'\');
-                parentfolder = pathname(1:idcs(end-1));
+                if ispc
+                    parentfolder = pathname(1:idcs(end-1));
+                    %add a check for ismac when devante is here and I can test on his machine
+                    %see if just pathname works
+                end
             else
                 openparent = strcat(parentfolder,'*.*');
                 [filename, pathname] = uigetfile(openparent, 'Select Plot File', 'MultiSelect', 'off');
                 idcs = strfind(pathname,'\');
-                parentfolder = pathname(1:idcs(end-1));
+                if ispc
+                    parentfolder = pathname(1:idcs(end-1));
+                end
             end
             
             [~,~,fileext] = fileparts(filename);
@@ -522,14 +528,14 @@ classdef beamplot < matlab.apps.AppBase
 
             % Create UIFigure
             app.UIFigure = uifigure;
-            app.UIFigure.Position = [100 100 535 595];
+            app.UIFigure.Position = [100 100 543 595];
             app.UIFigure.Name = 'Beam Plot Generator';
             setAutoResize(app, app.UIFigure, true)
 
             % Create OpenBPButton
             app.OpenBPButton = uibutton(app.UIFigure, 'push');
             app.OpenBPButton.ButtonPushedFcn = createCallbackFcn(app, @OpenBPButtonButtonPushed);
-            app.OpenBPButton.Position = [25 494 100 22];
+            app.OpenBPButton.Position = [29 494 77 22];
             app.OpenBPButton.Text = 'Open File';
 
             % Create instructionText
@@ -538,7 +544,7 @@ classdef beamplot < matlab.apps.AppBase
             app.instructionText.HorizontalAlignment = 'center';
             app.instructionText.FontSize = 14;
             app.instructionText.BackgroundColor = [0.9373 0.9373 0.9373];
-            app.instructionText.Position = [25 542 482 25];
+            app.instructionText.Position = [29 542 482 25];
             app.instructionText.Value = {'     Select beam plot file.   '};
 
             % Create HPmodel
@@ -550,7 +556,7 @@ classdef beamplot < matlab.apps.AppBase
             app.HPmodel.FontUnits = 'pixels';
             app.HPmodel.FontSize = 12;
             app.HPmodel.Units = 'pixels';
-            app.HPmodel.Position = [227 335 123 106];
+            app.HPmodel.Position = [231 335 123 106];
 
             % Create HPmodel0200
             app.HPmodel0200 = uiradiobutton(app.HPmodel);
@@ -576,7 +582,7 @@ classdef beamplot < matlab.apps.AppBase
             app.DCBgain.FontUnits = 'pixels';
             app.DCBgain.FontSize = 12;
             app.DCBgain.Units = 'pixels';
-            app.DCBgain.Position = [367 335 123 106];
+            app.DCBgain.Position = [371 335 123 106];
 
             % Create gainvalhigh
             app.gainvalhigh = uiradiobutton(app.DCBgain);
@@ -599,185 +605,185 @@ classdef beamplot < matlab.apps.AppBase
             app.XlinesCheckBox = uicheckbox(app.UIFigure);
             app.XlinesCheckBox.ValueChangedFcn = createCallbackFcn(app, @XlinesCheckBoxValueChanged);
             app.XlinesCheckBox.Text = '';
-            app.XlinesCheckBox.Position = [66 198 22 16];
+            app.XlinesCheckBox.Position = [70 198 22 16];
 
             % Create YlinesCheckBox2
             app.YlinesCheckBox2 = uicheckbox(app.UIFigure);
             app.YlinesCheckBox2.ValueChangedFcn = createCallbackFcn(app, @YlinesCheckBox2ValueChanged);
             app.YlinesCheckBox2.Text = '';
-            app.YlinesCheckBox2.Position = [66 169 22 16];
+            app.YlinesCheckBox2.Position = [70 169 22 16];
 
             % Create LabelNumericEditField
             app.LabelNumericEditField = uilabel(app.UIFigure);
             app.LabelNumericEditField.HorizontalAlignment = 'right';
-            app.LabelNumericEditField.Position = [45 416 94 15];
+            app.LabelNumericEditField.Position = [46 416 94 15];
             app.LabelNumericEditField.Text = 'Frequency (MHz)';
 
             % Create freq_in_mhz_input
             app.freq_in_mhz_input = uieditfield(app.UIFigure, 'numeric');
             app.freq_in_mhz_input.Limits = [0 50];
             app.freq_in_mhz_input.ValueDisplayFormat = '%.2f';
-            app.freq_in_mhz_input.Position = [148 412 54 22];
+            app.freq_in_mhz_input.Position = [157 412 46 22];
             app.freq_in_mhz_input.Value = 1;
 
             % Create Label
             app.Label = uilabel(app.UIFigure);
             app.Label.HorizontalAlignment = 'right';
-            app.Label.Position = [43 382 97 15];
+            app.Label.Position = [30 382 110 15];
             app.Label.Text = 'X-axis offset (mm)';
 
             % Create Xoffsetvar
             app.Xoffsetvar = uieditfield(app.UIFigure, 'numeric');
             app.Xoffsetvar.Limits = [-500 500];
-            app.Xoffsetvar.Position = [148 378 54 22];
+            app.Xoffsetvar.Position = [157 378 46 22];
 
             % Create Label2
             app.Label2 = uilabel(app.UIFigure);
             app.Label2.HorizontalAlignment = 'right';
-            app.Label2.Position = [42 347 97 15];
+            app.Label2.Position = [30 347 110 15];
             app.Label2.Text = 'Y-axis offset (mm)';
 
             % Create Yoffsetvar
             app.Yoffsetvar = uieditfield(app.UIFigure, 'numeric');
             app.Yoffsetvar.Limits = [-500 500];
-            app.Yoffsetvar.Position = [148 343 54 22];
+            app.Yoffsetvar.Position = [157 343 46 22];
 
             % Create IntensitiesCheckBox
             app.IntensitiesCheckBox = uicheckbox(app.UIFigure);
             app.IntensitiesCheckBox.Text = 'Intensity Plot';
-            app.IntensitiesCheckBox.Position = [214 255 88 16];
+            app.IntensitiesCheckBox.Position = [218 255 88 16];
             app.IntensitiesCheckBox.Value = true;
 
             % Create PressuresCheckBox
             app.PressuresCheckBox = uicheckbox(app.UIFigure);
             app.PressuresCheckBox.Text = 'Pressure Plot';
-            app.PressuresCheckBox.Position = [214 227 92 16];
+            app.PressuresCheckBox.Position = [218 227 92 16];
 
             % Create PNGCheckBox
             app.PNGCheckBox = uicheckbox(app.UIFigure);
             app.PNGCheckBox.Text = 'Save .PNGs';
-            app.PNGCheckBox.Position = [371 198 85 16];
+            app.PNGCheckBox.Position = [375 198 85 16];
             app.PNGCheckBox.Value = true;
 
             % Create TIFFCheckBox
             app.TIFFCheckBox = uicheckbox(app.UIFigure);
             app.TIFFCheckBox.Text = 'Save .TIFFs';
-            app.TIFFCheckBox.Position = [371 170 83 16];
+            app.TIFFCheckBox.Position = [375 170 83 16];
 
             % Create GeneratePlotButton
             app.GeneratePlotButton = uibutton(app.UIFigure, 'push');
             app.GeneratePlotButton.ButtonPushedFcn = createCallbackFcn(app, @GeneratePlotButtonButtonPushed);
             app.GeneratePlotButton.BackgroundColor = [0.9373 0.9373 0.9373];
             app.GeneratePlotButton.FontWeight = 'bold';
-            app.GeneratePlotButton.Position = [208 40 138 47];
+            app.GeneratePlotButton.Position = [212 40 138 47];
             app.GeneratePlotButton.Text = 'Generate Plot';
 
             % Create ColorCheckBox
             app.ColorCheckBox = uicheckbox(app.UIFigure);
             app.ColorCheckBox.Text = 'Color:';
-            app.ColorCheckBox.Position = [371 255 52 16];
+            app.ColorCheckBox.Position = [375 255 52 16];
             app.ColorCheckBox.Value = true;
 
             % Create BWCheckBox
             app.BWCheckBox = uicheckbox(app.UIFigure);
             app.BWCheckBox.Text = 'Black and white';
-            app.BWCheckBox.Position = [371 227 105 16];
+            app.BWCheckBox.Position = [375 227 105 16];
 
             % Create Readme
             app.Readme = uibutton(app.UIFigure, 'push');
             app.Readme.ButtonPushedFcn = createCallbackFcn(app, @ReadmeButtonPushed);
             app.Readme.FontSize = 10;
             app.Readme.FontAngle = 'italic';
-            app.Readme.Position = [479 0 56 22];
+            app.Readme.Position = [487 0 56 22];
             app.Readme.Text = 'Readme';
 
             % Create Label5
             app.Label5 = uilabel(app.UIFigure);
             app.Label5.HorizontalAlignment = 'right';
-            app.Label5.Position = [72 256 53 15];
+            app.Label5.Position = [76 256 53 15];
             app.Label5.Text = 'Contours:';
 
             % Create NumContoursField
             app.NumContoursField = uieditfield(app.UIFigure, 'numeric');
             app.NumContoursField.Limits = [0 500];
-            app.NumContoursField.Position = [131 252 48 22];
+            app.NumContoursField.Position = [135 252 48 22];
             app.NumContoursField.Value = 10;
 
             % Create LabelEditField
             app.LabelEditField = uilabel(app.UIFigure);
             app.LabelEditField.HorizontalAlignment = 'right';
-            app.LabelEditField.Position = [29 115 152 15];
+            app.LabelEditField.Position = [33 115 152 15];
             app.LabelEditField.Text = 'Edit Filename and Plot Title:';
 
             % Create GraphTitleField
             app.GraphTitleField = uieditfield(app.UIFigure, 'text');
-            app.GraphTitleField.Position = [188 111 319 22];
+            app.GraphTitleField.Position = [192 111 319 22];
 
             % Create Filepathfield
             app.Filepathfield = uieditfield(app.UIFigure, 'text');
             app.Filepathfield.Editable = 'off';
-            app.Filepathfield.Position = [139 494 368 22];
+            app.Filepathfield.Position = [113 494 398 22];
 
             % Create Label6
             app.Label6 = uilabel(app.UIFigure);
             app.Label6.FontSize = 14;
             app.Label6.FontWeight = 'bold';
-            app.Label6.Position = [50 450 119 18];
+            app.Label6.Position = [54 450 119 18];
             app.Label6.Text = 'Scan Parameters:';
 
             % Create Label7
             app.Label7 = uilabel(app.UIFigure);
             app.Label7.FontSize = 14;
             app.Label7.FontWeight = 'bold';
-            app.Label7.Position = [51 287 106 18];
+            app.Label7.Position = [55 287 106 18];
             app.Label7.Text = 'Graph Options:';
 
             % Create MaxValuesCheckBox
             app.MaxValuesCheckBox = uicheckbox(app.UIFigure);
             app.MaxValuesCheckBox.ValueChangedFcn = createCallbackFcn(app, @MaxValuesCheckBoxValueChanged);
             app.MaxValuesCheckBox.Text = 'Display Max Values';
-            app.MaxValuesCheckBox.Position = [214 170 127 16];
+            app.MaxValuesCheckBox.Position = [218 170 127 16];
 
             % Create NormplotCheckBox
             app.NormplotCheckBox = uicheckbox(app.UIFigure);
             app.NormplotCheckBox.ValueChangedFcn = createCallbackFcn(app, @NormplotCheckBoxValueChanged);
             app.NormplotCheckBox.Text = 'Normalized Plot';
-            app.NormplotCheckBox.Position = [214 198 106 16];
+            app.NormplotCheckBox.Position = [218 198 106 16];
 
             % Create LabelEditField2
             app.LabelEditField2 = uilabel(app.UIFigure);
             app.LabelEditField2.HorizontalAlignment = 'right';
-            app.LabelEditField2.Position = [85 200 40 15];
+            app.LabelEditField2.Position = [89 200 40 15];
             app.LabelEditField2.Text = 'X lines:';
 
             % Create Xlinesvar2
             app.Xlinesvar2 = uieditfield(app.UIFigure, 'text');
             app.Xlinesvar2.Enable = 'off';
-            app.Xlinesvar2.Position = [131 196 48 22];
+            app.Xlinesvar2.Position = [135 196 48 22];
 
             % Create Label8
             app.Label8 = uilabel(app.UIFigure);
             app.Label8.HorizontalAlignment = 'right';
-            app.Label8.Position = [85 171 40 15];
+            app.Label8.Position = [89 171 40 15];
             app.Label8.Text = 'Y lines:';
 
             % Create Ylinesvar2
             app.Ylinesvar2 = uieditfield(app.UIFigure, 'text');
             app.Ylinesvar2.Enable = 'off';
-            app.Ylinesvar2.Position = [131 167 48 22];
+            app.Ylinesvar2.Position = [135 167 48 22];
 
             % Create colormapdrop
             app.colormapdrop = uidropdown(app.UIFigure);
             app.colormapdrop.Items = {'parula', 'jet', 'hsv', 'hot', 'cool', 'spring', 'summer', 'autumn', 'winter', 'gray', 'bone', 'copper', 'pink', 'lines', 'colorcube', 'prism', 'flag', 'white'};
             app.colormapdrop.FontSize = 10;
             app.colormapdrop.BackgroundColor = [1 1 1];
-            app.colormapdrop.Position = [428 253 48 20];
+            app.colormapdrop.Position = [432 253 48 20];
             app.colormapdrop.Value = 'parula';
 
             % Create LabelDropDown
             app.LabelDropDown = uilabel(app.UIFigure);
             app.LabelDropDown.HorizontalAlignment = 'right';
-            app.LabelDropDown.Position = [47 228 77 15];
+            app.LabelDropDown.Position = [51 228 77 15];
             app.LabelDropDown.Text = 'Contour color:';
 
             % Create contourcolordrop
@@ -785,7 +791,7 @@ classdef beamplot < matlab.apps.AppBase
             app.contourcolordrop.Items = {'Black', 'White', 'None'};
             app.contourcolordrop.FontSize = 10;
             app.contourcolordrop.BackgroundColor = [1 1 1];
-            app.contourcolordrop.Position = [131 225 48 20];
+            app.contourcolordrop.Position = [135 225 48 20];
             app.contourcolordrop.Value = 'Black';
 
             % Create closeallbutton
@@ -793,7 +799,7 @@ classdef beamplot < matlab.apps.AppBase
             app.closeallbutton.ButtonPushedFcn = createCallbackFcn(app, @closeallbuttonpush);
             app.closeallbutton.FontSize = 11;
             app.closeallbutton.FontAngle = 'italic';
-            app.closeallbutton.Position = [1 0 87 22];
+            app.closeallbutton.Position = [0 0 87 22];
             app.closeallbutton.Text = 'Close all figures';
         end
     end
