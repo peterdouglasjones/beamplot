@@ -315,7 +315,7 @@ classdef beamplot < matlab.apps.AppBase
                 if ispc
                     parentfolder = pathname(1:idcs(end-1));
                     %add a check for ismac when devante is here and I can test on his machine
-                    %see if just pathname works
+                    %see if just 'pathname' works on a mac
                 end
             else
                 openparent = strcat(parentfolder,'*.*');
