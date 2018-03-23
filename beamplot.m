@@ -311,26 +311,37 @@ classdef beamplot < matlab.apps.AppBase
             persistent parentfolder;
             if isempty(parentfolder);
                 [filename, pathname] = uigetfile('*.*', 'Select Plot File', 'MultiSelect', 'off');
-                idcs = strfind(pathname,'\');
-                if ispc
-                    parentfolder = pathname(1:idcs(end-1));
-                    %add a check for ismac when devante is here and I can test on his machine
-                    %first, find out what this parentfolder variable is on a Mac, then just try pathname instead.
+                app.UIFigure.Visible = 'off';
+                app.UIFigure.Visible = 'on';
+                if pathname == 0;
+                    return
+                else
+                    idcs = strfind(pathname,'\');
+                    if ispc
+                        parentfolder = pathname(1:idcs(end-1));
+                        %add a check for ismac when devante is here and I can test on his machine
+                        %first, find out what this parentfolder variable is on a Mac, then just try pathname instead.
+                    end
                 end
             else
                 openparent = strcat(parentfolder,'*.*');
                 [filename, pathname] = uigetfile(openparent, 'Select Plot File', 'MultiSelect', 'off');
-                idcs = strfind(pathname,'\');
-                if ispc
-                    parentfolder = pathname(1:idcs(end-1));
+                app.UIFigure.Visible = 'off';
+                app.UIFigure.Visible = 'on';
+                if pathname == 0;
+                    return
+                else
+                    idcs = strfind(pathname,'\');
+                    if ispc
+                        parentfolder = pathname(1:idcs(end-1));
+                    end
                 end
+                
             end
             
             [~,~,fileext] = fileparts(filename);
             if strcmp(fileext,'.xlsx');
                 reldata2 = xlsread(fullfile(pathname,filename)); 
-                app.UIFigure.Visible = 'off';
-                app.UIFigure.Visible = 'on';
                 reldata = transpose(reldata2(3:end,1:end)); %reads voltage data from file (and axis1/axis2 coords)
                 reldata(1) = 0;
                 Ashft = reldata(1,:)';
@@ -350,8 +361,6 @@ classdef beamplot < matlab.apps.AppBase
                 setappdata(app.UIFigure,'pathname',pathname);
             else
                 reldata = transpose(dlmread(fullfile(pathname,filename),'',6,0)); %reads voltage data from file (and axis1/axis2 coords)
-                app.UIFigure.Visible = 'off';
-                app.UIFigure.Visible = 'on';
                 app.Filepathfield.Value = fullfile(pathname, filename);
                 fid = fopen(fullfile(pathname,filename));
                 IDcell = textscan(fid,'%s','Delimiter','\t');
