@@ -7,7 +7,7 @@ classdef beamplot < matlab.apps.AppBase
         instructionText       matlab.ui.control.TextArea         %      Sel...
         HPmodel               matlab.ui.container.ButtonGroup    % Hydropho...
         HPmodel0200           matlab.ui.control.RadioButton      % HNP-0200
-        HPmodel0400           matlab.ui.control.RadioButton      % HNP-0400
+        HPmodel0400old        matlab.ui.control.RadioButton      % HNP-0400...
         HPmodel0500           matlab.ui.control.RadioButton      % HNR-0500
         DCBgain               matlab.ui.container.ButtonGroup    % DC Block...
         gainvalhigh           matlab.ui.control.RadioButton      % High
@@ -46,6 +46,7 @@ classdef beamplot < matlab.apps.AppBase
         LabelDropDown         matlab.ui.control.Label            % Contour ...
         contourcolordrop      matlab.ui.control.DropDown         % Black, W...
         closeallbutton        matlab.ui.control.Button           % Close al...
+        HPmodel0400new        matlab.ui.control.RadioButton      % HNP-0400...
     end
 
     
@@ -124,6 +125,20 @@ classdef beamplot < matlab.apps.AppBase
             cb.Label.String = colorbarlabelstr;
             
             %getcurrentaxes setup
+            if axis2(end)-axis2(1) < 21;
+                set(gca,'XTick',[axis2(1):2:axis2(end)]);
+            elseif rem(axis2(end)-axis2(1),5) == 0;
+                if axis2(end)-axis2(1) < 50;
+                    set(gca,'XTick',[axis2(1):5:axis2(end)]);
+                end
+            end
+            if axis1(end)-axis1(1) < 21;
+                set(gca,'YTick',[axis1(1):2:axis1(end)]);
+            elseif rem(axis1(end)-axis1(1),5) == 0;
+                if axis1(end)-axis1(1) < 50;
+                    set(gca,'YTick',[axis1(1):5:axis1(end)]);
+                end
+            end
             set(gca,'FontName','Helvetica','FontSize', 20,'LineWidth',2);
 
             title(graphtitle,'Interpreter', 'none');
@@ -198,9 +213,12 @@ classdef beamplot < matlab.apps.AppBase
             if app.HPmodel0500.Value;
                 hpvals = dlmread('SenslookupHNR0500.txt','',1,0);
                 hydrophone_model = 'HNR-0500';
-            elseif app.HPmodel0400.Value;
+            elseif app.HPmodel0400old.Value;
                 hpvals = dlmread('SenslookupHNP0400.txt','',1,0);
-                hydrophone_model = 'HNP-0400';
+                hydrophone_model = 'HNP-0400 (old)';
+            elseif app.HPmodel0400new.Value;
+                hpvals = dlmread('SenslookupHNP0400-1430.txt','',1,0);
+                hydrophone_model = 'HNP-0400 (new)';
             elseif app.HPmodel0200.Value;
                 hpvals = dlmread('SenslookupHNP0200.txt','',1,0);
                 hydrophone_model = 'HNP-0200';
@@ -267,7 +285,7 @@ classdef beamplot < matlab.apps.AppBase
             intensities = vpp2s./(8*kcalfactor);            %convert each Vpp² to I
             maxintensity = max(max((intensities)));         %find maximum value
             avgintensity = mean(mean(intensities));         %find average intensity
-            total_power = avgintensity*axis1_temp(end)*axis2_temp(end)/100;
+            total_power = avgintensity*axis1_temp(end)*axis2_temp(end)/100
             pressures = sqrt(intensities*10000*2*1500*1000)/(1e6);  %convert I to MPa
             maxpressure = max(max((pressures)));         %find maximum value
             normalized =  intensities./maxintensity;        %make normalized table
@@ -319,8 +337,10 @@ classdef beamplot < matlab.apps.AppBase
                     idcs = strfind(pathname,'\');
                     if ispc
                         parentfolder = pathname(1:idcs(end-1));
-                        %add a check for ismac when devante is here and I can test on his machine
-                        %first, find out what this parentfolder variable is on a Mac, then just try pathname instead.
+                        % this is current version mac check 2
+                    end
+                    if ismac
+                        parentfolder = pathname;
                     end
                 end
             else
@@ -334,6 +354,9 @@ classdef beamplot < matlab.apps.AppBase
                     idcs = strfind(pathname,'\');
                     if ispc
                         parentfolder = pathname(1:idcs(end-1));
+                    end
+                    if ismac
+                        parentfolder = pathname;
                     end
                 end
                 
@@ -349,7 +372,7 @@ classdef beamplot < matlab.apps.AppBase
                 reldata(:,1) = Bshft;
                 app.Filepathfield.Value = fullfile(pathname, filename);
                 app.instructionText.Value = 'No scan parameters loaded from file, please input manually.';
-                app.HPmodel0400.Value = 1;
+                app.HPmodel0400new.Value = 1;
                 app.gainvalhigh.Value = 1;
                 set(app.gainvalnone,'enable','off');
                 app.Xoffsetvar.Value = 0;
@@ -371,7 +394,7 @@ classdef beamplot < matlab.apps.AppBase
                 transducerID = [''];
                 if strcmp(IDarraytrunc(3),'')
                     app.instructionText.Value = 'No scan parameters loaded from file, please input manually.';
-                    app.HPmodel0400.Value = 1;
+                    app.HPmodel0400new.Value = 1;
                     app.gainvalhigh.Value = 1;
                     set(app.gainvalnone,'enable','off');
                     app.Xoffsetvar.Value = 0;
@@ -383,8 +406,13 @@ classdef beamplot < matlab.apps.AppBase
                     if strcmp(IDarraytrunc(4),'HNR-0500');
                         app.HPmodel0500.Value = 1;
                         set(app.gainvalnone,'enable','on');
-                    elseif strcmp(IDarraytrunc(4),'HNP-0400');
-                        app.HPmodel0400.Value = 1;
+                    elseif strcmp(IDarraytrunc(4),'HNP-0400') || strcmp(IDarraytrunc(4),'HNP-0400 (old)');
+                    %elseif strcmp(IDarraytrunc(4),'HNP-0400 (old)');
+                        app.HPmodel0400old.Value = 1;
+                        app.gainvalhigh.Value = 1;
+                        set(app.gainvalnone,'enable','off')
+                    elseif strcmp(IDarraytrunc(4),'HNP-0400 (new)');
+                        app.HPmodel0400new.Value = 1;
                         app.gainvalhigh.Value = 1;
                         set(app.gainvalnone,'enable','off')
                     elseif strcmp(IDarraytrunc(4),'HNP-0200');
@@ -442,7 +470,10 @@ classdef beamplot < matlab.apps.AppBase
             if app.HPmodel0200.Value;
                 app.gainvalhigh.Value = 1;
                 set(app.gainvalnone,'enable','off');
-            elseif app.HPmodel0400.Value;
+            elseif app.HPmodel0400old.Value;
+                app.gainvalhigh.Value = 1;
+                set(app.gainvalnone,'enable','off');
+            elseif app.HPmodel0400new.Value;
                 app.gainvalhigh.Value = 1;
                 set(app.gainvalnone,'enable','off');
             elseif app.HPmodel0500.Value;
@@ -472,7 +503,7 @@ classdef beamplot < matlab.apps.AppBase
         % Readme button pushed function
         function ReadmeButtonPushed(app)
             h = figure;
-            hp = uipanel(h,'Title','Readme','FontSize',12,...
+            hp = uipanel(h,'Title','Beam Plot Generator Version 1.01, 03/28/18 — Readme','FontSize',12,...
                 'Position',[0 0 1 1]);
             btn = uicontrol(h,'Style', 'pushbutton', 'String', 'Close Readme',...
                 'Position', [18 18 90 36],...
@@ -538,7 +569,7 @@ classdef beamplot < matlab.apps.AppBase
             % Create UIFigure
             app.UIFigure = uifigure;
             app.UIFigure.Position = [100 100 543 595];
-            app.UIFigure.Name = 'Beam Plot Generator';
+            app.UIFigure.Name = 'Beam Plot Generator v1.1';
             setAutoResize(app, app.UIFigure, true)
 
             % Create OpenBPButton
@@ -565,23 +596,28 @@ classdef beamplot < matlab.apps.AppBase
             app.HPmodel.FontUnits = 'pixels';
             app.HPmodel.FontSize = 12;
             app.HPmodel.Units = 'pixels';
-            app.HPmodel.Position = [231 335 123 106];
+            app.HPmodel.Position = [231 329 129 122];
 
             % Create HPmodel0200
             app.HPmodel0200 = uiradiobutton(app.HPmodel);
             app.HPmodel0200.Text = 'HNP-0200';
-            app.HPmodel0200.Position = [10 59 77 16];
+            app.HPmodel0200.Position = [10 75 77 16];
 
-            % Create HPmodel0400
-            app.HPmodel0400 = uiradiobutton(app.HPmodel);
-            app.HPmodel0400.Value = true;
-            app.HPmodel0400.Text = 'HNP-0400';
-            app.HPmodel0400.Position = [10 37 77 16];
+            % Create HPmodel0400old
+            app.HPmodel0400old = uiradiobutton(app.HPmodel);
+            app.HPmodel0400old.Text = 'HNP-0400 (old)';
+            app.HPmodel0400old.Position = [10 53 105 16];
 
             % Create HPmodel0500
             app.HPmodel0500 = uiradiobutton(app.HPmodel);
+            app.HPmodel0500.Value = true;
             app.HPmodel0500.Text = 'HNR-0500';
-            app.HPmodel0500.Position = [10 15 78 16];
+            app.HPmodel0500.Position = [10 8 78 16];
+
+            % Create HPmodel0400new
+            app.HPmodel0400new = uiradiobutton(app.HPmodel);
+            app.HPmodel0400new.Text = 'HNP-0400 (new)';
+            app.HPmodel0400new.Position = [10 31 111 16];
 
             % Create DCBgain
             app.DCBgain = uibuttongroup(app.UIFigure);
@@ -591,11 +627,10 @@ classdef beamplot < matlab.apps.AppBase
             app.DCBgain.FontUnits = 'pixels';
             app.DCBgain.FontSize = 12;
             app.DCBgain.Units = 'pixels';
-            app.DCBgain.Position = [371 335 123 106];
+            app.DCBgain.Position = [371 338 123 106];
 
             % Create gainvalhigh
             app.gainvalhigh = uiradiobutton(app.DCBgain);
-            app.gainvalhigh.Value = true;
             app.gainvalhigh.Text = 'High';
             app.gainvalhigh.Position = [10 59 45 16];
 
@@ -606,7 +641,7 @@ classdef beamplot < matlab.apps.AppBase
 
             % Create gainvalnone
             app.gainvalnone = uiradiobutton(app.DCBgain);
-            app.gainvalnone.Enable = 'off';
+            app.gainvalnone.Value = true;
             app.gainvalnone.Text = 'None';
             app.gainvalnone.Position = [10 15 49 16];
 
