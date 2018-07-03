@@ -9,6 +9,7 @@ classdef beamplot < matlab.apps.AppBase
         HPmodel0200           matlab.ui.control.RadioButton      % HNP-0200
         HPmodel0400old        matlab.ui.control.RadioButton      % HNP-0400...
         HPmodel0500           matlab.ui.control.RadioButton      % HNR-0500
+        HPmodel0400new        matlab.ui.control.RadioButton      % HNP-0400...
         DCBgain               matlab.ui.container.ButtonGroup    % DC Block...
         gainvalhigh           matlab.ui.control.RadioButton      % High
         gainvallow            matlab.ui.control.RadioButton      % Low
@@ -46,9 +47,16 @@ classdef beamplot < matlab.apps.AppBase
         LabelDropDown         matlab.ui.control.Label            % Contour ...
         contourcolordrop      matlab.ui.control.DropDown         % Black, W...
         closeallbutton        matlab.ui.control.Button           % Close al...
-        HPmodel0400new        matlab.ui.control.RadioButton      % HNP-0400...
     end
 
+    
+    %Bugs or action items:
+    %If there's no parent folder, program crashes. Check line 339. for example, scan file in the root of a flash drive.
+    
+    
+    
+    
+    
     
     methods (Access = private)
         
@@ -429,8 +437,8 @@ classdef beamplot < matlab.apps.AppBase
                         app.gainvalnone.Value = 1;
                     end
                     
-                    app.Xoffsetvar.Value = cellfun(@str2num, IDarraytrunc(16));
-                    app.Yoffsetvar.Value = cellfun(@str2num, IDarraytrunc(18));
+                    app.Xoffsetvar.Value = cellfun(@str2num, IDarraytrunc(18));
+                    app.Yoffsetvar.Value = cellfun(@str2num, IDarraytrunc(16));
                     app.freq_in_mhz_input.Value = cellfun(@str2num, IDarraytrunc(10));
                     transducerID = char(IDarraytrunc(2));
                     graphtitlestr = [transducerID,'—',filename];
@@ -596,28 +604,28 @@ classdef beamplot < matlab.apps.AppBase
             app.HPmodel.FontUnits = 'pixels';
             app.HPmodel.FontSize = 12;
             app.HPmodel.Units = 'pixels';
-            app.HPmodel.Position = [231 329 129 122];
+            app.HPmodel.Position = [231 327 129 127];
 
             % Create HPmodel0200
             app.HPmodel0200 = uiradiobutton(app.HPmodel);
             app.HPmodel0200.Text = 'HNP-0200';
-            app.HPmodel0200.Position = [10 75 77 16];
+            app.HPmodel0200.Position = [10 80 77 16];
 
             % Create HPmodel0400old
             app.HPmodel0400old = uiradiobutton(app.HPmodel);
             app.HPmodel0400old.Text = 'HNP-0400 (old)';
-            app.HPmodel0400old.Position = [10 53 105 16];
+            app.HPmodel0400old.Position = [10 58 105 16];
 
             % Create HPmodel0500
             app.HPmodel0500 = uiradiobutton(app.HPmodel);
             app.HPmodel0500.Value = true;
             app.HPmodel0500.Text = 'HNR-0500';
-            app.HPmodel0500.Position = [10 8 78 16];
+            app.HPmodel0500.Position = [10 13 78 16];
 
             % Create HPmodel0400new
             app.HPmodel0400new = uiradiobutton(app.HPmodel);
             app.HPmodel0400new.Text = 'HNP-0400 (new)';
-            app.HPmodel0400new.Position = [10 31 111 16];
+            app.HPmodel0400new.Position = [10 36 111 16];
 
             % Create DCBgain
             app.DCBgain = uibuttongroup(app.UIFigure);
