@@ -759,7 +759,7 @@ classdef beamplot < matlab.apps.AppBase
             app.NumContoursField = uieditfield(app.UIFigure, 'numeric');
             app.NumContoursField.Limits = [0 500];
             app.NumContoursField.Position = [135 252 48 22];
-            app.NumContoursField.Value = 10;
+            app.NumContoursField.Value = 9;
 
             % Create LabelEditField
             app.LabelEditField = uilabel(app.UIFigure);
