@@ -2,62 +2,79 @@ classdef beamplot < matlab.apps.AppBase
 
     % Properties that correspond to app components
     properties (Access = public)
-        UIFigure                    matlab.ui.Figure
-        TabGroup                    matlab.ui.container.TabGroup
-        Tab                         matlab.ui.container.Tab
-        OpenBPButton                matlab.ui.control.Button
-        instructionText             matlab.ui.control.TextArea
-        Filepathfield               matlab.ui.control.EditField
-        HPmodel                     matlab.ui.container.ButtonGroup
-        HPmodel0200                 matlab.ui.control.RadioButton
-        HPmodel0400old              matlab.ui.control.RadioButton
-        HPmodel0500                 matlab.ui.control.RadioButton
-        HPmodel0400new              matlab.ui.control.RadioButton
-        DCBgain                     matlab.ui.container.ButtonGroup
-        gainvalhigh                 matlab.ui.control.RadioButton
-        gainvallow                  matlab.ui.control.RadioButton
-        gainvalnone                 matlab.ui.control.RadioButton
-        Label6                      matlab.ui.control.Label
-        Label7                      matlab.ui.control.Label
-        ColorCheckBox               matlab.ui.control.CheckBox
-        BWCheckBox                  matlab.ui.control.CheckBox
-        colormapdrop                matlab.ui.control.DropDown
-        IntensitiesCheckBox         matlab.ui.control.CheckBox
-        PressuresCheckBox           matlab.ui.control.CheckBox
-        NormplotCheckBox            matlab.ui.control.CheckBox
-        SurfCheckBox                matlab.ui.control.CheckBox
-        PNGCheckBox                 matlab.ui.control.CheckBox
-        TIFFCheckBox                matlab.ui.control.CheckBox
-        FIGcheckbox                 matlab.ui.control.CheckBox
-        GeneratePlotButton          matlab.ui.control.Button
-        closeallbutton              matlab.ui.control.Button
-        LabelNumericEditField       matlab.ui.control.Label
-        freq_in_mhz_input           matlab.ui.control.NumericEditField
-        Label                       matlab.ui.control.Label
-        Xoffsetvar                  matlab.ui.control.NumericEditField
-        Label2                      matlab.ui.control.Label
-        Yoffsetvar                  matlab.ui.control.NumericEditField
-        Label5                      matlab.ui.control.Label
-        NumContoursField            matlab.ui.control.NumericEditField
-        LabelEditField              matlab.ui.control.Label
-        GraphTitleField             matlab.ui.control.EditField
-        Tab2                        matlab.ui.container.Tab
-        XlinesCheckBox              matlab.ui.control.CheckBox
-        YlinesCheckBox2             matlab.ui.control.CheckBox
-        Label8                      matlab.ui.control.Label
-        Ylinesvar2                  matlab.ui.control.EditField
-        LabelDropDown               matlab.ui.control.Label
-        contourcolordrop            matlab.ui.control.DropDown
-        MaxValuesCheckBox           matlab.ui.control.CheckBox
-        LabelEditField2             matlab.ui.control.Label
-        Xlinesvar2                  matlab.ui.control.EditField
-        IntensityScalingFactorEditFieldLabel  matlab.ui.control.Label
-        IntensityScalingFactor      matlab.ui.control.NumericEditField
-        PressureScalingFactorLabel  matlab.ui.control.Label
-        PressureScalingFactor       matlab.ui.control.NumericEditField
-        Tab3                        matlab.ui.container.Tab
-        TextArea                    matlab.ui.control.TextArea
-        TextArea2                   matlab.ui.control.TextArea
+        UIFigure                     matlab.ui.Figure
+        TabGroup                     matlab.ui.container.TabGroup
+        Tab                          matlab.ui.container.Tab
+        OpenBPButton                 matlab.ui.control.Button
+        instructionText              matlab.ui.control.TextArea
+        Filepathfield                matlab.ui.control.EditField
+        HPmodel                      matlab.ui.container.ButtonGroup
+        HPmodel0200                  matlab.ui.control.RadioButton
+        HPmodel0400old               matlab.ui.control.RadioButton
+        HPmodel0500                  matlab.ui.control.RadioButton
+        HPmodel0400new               matlab.ui.control.RadioButton
+        DCBgain                      matlab.ui.container.ButtonGroup
+        gainvalhigh                  matlab.ui.control.RadioButton
+        gainvallow                   matlab.ui.control.RadioButton
+        gainvalnone                  matlab.ui.control.RadioButton
+        Label6                       matlab.ui.control.Label
+        Label7                       matlab.ui.control.Label
+        ColorCheckBox                matlab.ui.control.CheckBox
+        BWCheckBox                   matlab.ui.control.CheckBox
+        colormapdrop                 matlab.ui.control.DropDown
+        IntensitiesCheckBox          matlab.ui.control.CheckBox
+        PressuresCheckBox            matlab.ui.control.CheckBox
+        NormplotCheckBox             matlab.ui.control.CheckBox
+        SurfCheckBox                 matlab.ui.control.CheckBox
+        PNGCheckBox                  matlab.ui.control.CheckBox
+        TIFFCheckBox                 matlab.ui.control.CheckBox
+        FIGcheckbox                  matlab.ui.control.CheckBox
+        GeneratePlotButton           matlab.ui.control.Button
+        closeallbutton               matlab.ui.control.Button
+        LabelNumericEditField        matlab.ui.control.Label
+        freq_in_mhz_input            matlab.ui.control.NumericEditField
+        Label                        matlab.ui.control.Label
+        Xoffsetvar                   matlab.ui.control.NumericEditField
+        Label2                       matlab.ui.control.Label
+        Yoffsetvar                   matlab.ui.control.NumericEditField
+        ContoursLabel_2              matlab.ui.control.Label
+        NumContoursField             matlab.ui.control.NumericEditField
+        LabelEditField               matlab.ui.control.Label
+        GraphTitleField              matlab.ui.control.EditField
+        ContoursLabel                matlab.ui.control.Label
+        PercentContoursField         matlab.ui.control.NumericEditField
+        Tab2                         matlab.ui.container.Tab
+        XlinesCheckBox               matlab.ui.control.CheckBox
+        YlinesCheckBox2              matlab.ui.control.CheckBox
+        Label8                       matlab.ui.control.Label
+        Ylinesvar2                   matlab.ui.control.EditField
+        ContourplotlinecolorLabel    matlab.ui.control.Label
+        contourcolordrop             matlab.ui.control.DropDown
+        MaxValuesCheckBox            matlab.ui.control.CheckBox
+        LabelEditField2              matlab.ui.control.Label
+        Xlinesvar2                   matlab.ui.control.EditField
+        IntensityScalingFactorLabel  matlab.ui.control.Label
+        IntensityScalingFactor       matlab.ui.control.NumericEditField
+        PressureScalingFactorLabel   matlab.ui.control.Label
+        PressureScalingFactor        matlab.ui.control.NumericEditField
+        SurfaceplotlinecolorLabel    matlab.ui.control.Label
+        surflinecolordrop            matlab.ui.control.DropDown
+        TracepercentcontourCheckBox  matlab.ui.control.CheckBox
+        Tracepercentcontourvalue     matlab.ui.control.NumericEditField
+        IntensityEditFieldLabel      matlab.ui.control.Label
+        IntensityLimitLow            matlab.ui.control.NumericEditField
+        toEditFieldLabel             matlab.ui.control.Label
+        IntensityLimitHigh           matlab.ui.control.NumericEditField
+        WcmLabel                     matlab.ui.control.Label
+        MPaLabel                     matlab.ui.control.Label
+        PressureEditFieldLabel       matlab.ui.control.Label
+        PressureLimitLow             matlab.ui.control.NumericEditField
+        toEditField_2Label           matlab.ui.control.Label
+        PressureLimitHigh            matlab.ui.control.NumericEditField
+        CustomPlotLimitsCheckBox     matlab.ui.control.CheckBox
+        Tab3                         matlab.ui.container.Tab
+        TextArea                     matlab.ui.control.TextArea
+        TextArea2                    matlab.ui.control.TextArea
     end
 
     
@@ -79,8 +96,8 @@ classdef beamplot < matlab.apps.AppBase
             pause(0.00001);
             frame_h = get(handle(gcf),'JavaFrame');
             set(frame_h,'Maximized',1);
-            s = surf(axis2,axis1,values_to_plot);
-            s.EdgeColor = app.contourcolordrop.Value;
+            s = surf(axis2,axis1,values_to_plot,'Facecolor','interp');
+            s.EdgeColor = app.surflinecolordrop.Value;
             title(graphtitle,'Interpreter', 'none');
             set(gca,'FontName','Helvetica','FontSize', 20,'LineWidth',2);
             xlabel('mm') % x-axis label
@@ -112,7 +129,15 @@ classdef beamplot < matlab.apps.AppBase
 %                     text(maxval_Xcoord,maxval_Ycoord,maxval_text,'Color',...
 %                         maxval_text_color,'FontSize',22);
 %                 end
-                maxcb = maxintensity;
+                if app.CustomPlotLimitsCheckBox.Value;
+                    maxcolorbar = app.IntensityLimitHigh.Value;
+                    mincolorbar = app.IntensityLimitLow.Value;
+                    zlim([app.IntensityLimitLow.Value app.IntensityLimitHigh.Value]);
+                else
+                    maxcolorbar = maxintensity;
+                    mincolorbar = 0;
+                end
+                %maxcb = maxintensity;
                 figure_title_tiff = strcat(figure_title_temp,'_Surface','_Intensity.tif');
                 figure_title_png = strcat(figure_title_temp,'_Surface','_Intensity.png');
                 figure_title_fig = strcat(figure_title_temp,'_Surface','_Intensity.fig');
@@ -163,18 +188,34 @@ classdef beamplot < matlab.apps.AppBase
                 end
             end
             
+%             %colorbar setup
+%             contourvaliter = app.NumContoursField.Value+1;
+%             while contourvaliter > 12;
+%                 contourvaliter = floor(contourvaliter/2);
+%             end    
+%             cbstep = maxcb/contourvaliter;
+%             cb = colorbar('LineWidth',1);
+%             set(cb, 'ylim', [0 maxcb]);
+%             set(cb,'ytick',[0:cbstep:maxcb]);
+%             newticks=cellfun(@(x)sprintf('%.2f',x),num2cell(get(cb,'ytick')),'Un',0);
+%             set(cb,'yticklabel',newticks);
+%             cb.Label.String = colorbarlabelstr;
+            
             %colorbar setup
-            contourvaliter = app.NumContoursField.Value;
+            contourvaliter = app.NumContoursField.Value+1;
             while contourvaliter > 12;
                 contourvaliter = floor(contourvaliter/2);
             end    
-            cbstep = maxcb/contourvaliter;
+            cbstep = (maxcolorbar-mincolorbar)/contourvaliter;    
             cb = colorbar('LineWidth',1);
-            set(cb, 'ylim', [0 maxcb]);
-            set(cb,'ytick',[0:cbstep:maxcb]);
+            caxis([mincolorbar maxcolorbar]);
+            %set(cb, 'ylim', [0 maxcb]);
+            set(cb,'ytick',[mincolorbar:cbstep:maxcolorbar]);
             newticks=cellfun(@(x)sprintf('%.2f',x),num2cell(get(cb,'ytick')),'Un',0);
             set(cb,'yticklabel',newticks);
             cb.Label.String = colorbarlabelstr;
+            
+            
             
             if saveTIFF;
                 surf_title_tiff = figure_title_tiff;
@@ -195,13 +236,65 @@ classdef beamplot < matlab.apps.AppBase
             
             BP_file_path = getappdata(app.UIFigure,'pathname');
             
+            maximumvalue = max(max(values_to_plot));
+            contourlevelsplus = linspace(0,1,app.NumContoursField.Value+2)*maximumvalue;
+            contourlevels = contourlevelsplus(1:end-1);
+            numofcolors = app.NumContoursField.Value+1;
+            
+            if strcmp(app.colormapdrop.Value,'parula')
+                colorstr = parula(numofcolors);
+            elseif strcmp(app.colormapdrop.Value,'jet')
+                colorstr = jet(numofcolors);
+            elseif strcmp(app.colormapdrop.Value,'hsv')
+                colorstr = hsv(numofcolors);
+            elseif strcmp(app.colormapdrop.Value,'hot')
+                colorstr = hot(numofcolors);
+            elseif strcmp(app.colormapdrop.Value,'cool')
+                colorstr = cool(numofcolors);
+            elseif strcmp(app.colormapdrop.Value,'spring')
+                colorstr = spring(numofcolors);
+            elseif strcmp(app.colormapdrop.Value,'summer')
+                colorstr = summer(numofcolors);
+            elseif strcmp(app.colormapdrop.Value,'autumn')
+                colorstr = autumn(numofcolors);
+            elseif strcmp(app.colormapdrop.Value,'winter')
+                colorstr = winter(numofcolors);
+            elseif strcmp(app.colormapdrop.Value,'gray')
+                colorstr = gray(numofcolors);
+            elseif strcmp(app.colormapdrop.Value,'bone')
+                colorstr = bone(numofcolors);
+            elseif strcmp(app.colormapdrop.Value,'copper')
+                colorstr = copper(numofcolors);
+            elseif strcmp(app.colormapdrop.Value,'pink')
+                colorstr = pink(numofcolors);
+            elseif strcmp(app.colormapdrop.Value,'lines')
+                colorstr = lines(numofcolors);
+            elseif strcmp(app.colormapdrop.Value,'colorcube')
+                colorstr = colorcube(numofcolors);
+            elseif strcmp(app.colormapdrop.Value,'prism')
+                colorstr = prism(numofcolors);
+            elseif strcmp(app.colormapdrop.Value,'flag')
+                colorstr = flag(numofcolors);
+            elseif strcmp(app.colormapdrop.Value,'white')
+                colorstr = white(numofcolors);
+            end
+
             figure;
             pause(0.00001);
             frame_h = get(handle(gcf),'JavaFrame');
             set(frame_h,'Maximized',1);
-            contourf(axis2,axis1,values_to_plot,contours,'LineWidth',.5,'LineColor',app.contourcolordrop.Value);
+            contourf(axis2,axis1,values_to_plot,contourlevels,'LineWidth',.5,'LineColor',app.contourcolordrop.Value);
+            if app.TracepercentcontourCheckBox.Value;
+                hold on
+                tracepercentcontour = app.Tracepercentcontourvalue.Value/100*maximumvalue;
+                contour(axis2,axis1,values_to_plot,[tracepercentcontour tracepercentcontour],'Linewidth',4,'Linecolor','black','LineStyle',':');
+                hold off
+            end
+           
             
-            colorstr = app.colormapdrop.Value;
+            %colorstr = app.colormapdrop.Value;
+            %colorstr = app.contourcolordrop.Value(app.NumContoursField.Value+1);
+            %colorstr = parula(10);
             axis equal tight;
             if strcmp(colormapvar,'BW');
                 maxval_text_color = 'Black';
@@ -226,7 +319,15 @@ classdef beamplot < matlab.apps.AppBase
                     text(maxval_Xcoord,maxval_Ycoord,maxval_text,'Color',...
                         maxval_text_color,'FontSize',22);
                 end
-                maxcb = maxintensity;
+                if app.CustomPlotLimitsCheckBox.Value;
+                    maxcolorbar = app.IntensityLimitHigh.Value;
+                    mincolorbar = app.IntensityLimitLow.Value;
+                else
+                    maxcolorbar = maxintensity;
+                    mincolorbar = 0;
+                end
+                %maxcb = maxintensity;
+                
                 figure_title_tiff = strcat(figure_title_temp,'_Intensity.tif');
                 figure_title_png = strcat(figure_title_temp,'_Intensity.png');
                 figure_title_fig = strcat(figure_title_temp,'_Intensity.fig');
@@ -241,7 +342,14 @@ classdef beamplot < matlab.apps.AppBase
                     text(maxval_Xcoord,maxval_Ycoord,maxval_text,'Color',...
                         maxval_text_color,'FontSize',22);
                 end
-                maxcb = maxpressure;
+                if app.CustomPlotLimitsCheckBox.Value;
+                    maxcolorbar = app.PressureLimitHigh.Value;
+                    mincolorbar = app.PressureLimitLow.Value;
+                else
+                    maxcolorbar = maxpressure;
+                    mincolorbar = 0;
+                end
+                %maxcb = maxpressure;
                 figure_title_tiff = strcat(figure_title_temp,'_Pressure.tif');
                 figure_title_png = strcat(figure_title_temp,'_Pressure.png');
                 figure_title_fig = strcat(figure_title_temp,'_Pressure.fig');
@@ -262,30 +370,31 @@ classdef beamplot < matlab.apps.AppBase
             end
             
             %colorbar setup
-            contourvaliter = app.NumContoursField.Value;
-            while contourvaliter > 12;
+            contourvaliter = app.NumContoursField.Value+1;
+            while contourvaliter > 12
                 contourvaliter = floor(contourvaliter/2);
             end    
-            cbstep = maxcb/contourvaliter;    
+            cbstep = (maxcolorbar-mincolorbar)/contourvaliter;    
             cb = colorbar('LineWidth',1);
-            set(cb, 'ylim', [0 maxcb]);
-            set(cb,'ytick',[0:cbstep:maxcb]);
+            caxis([mincolorbar maxcolorbar]);
+            %set(cb, 'ylim', [0 maxcb]);
+            set(cb,'ytick',[mincolorbar:cbstep:maxcolorbar]);
             newticks=cellfun(@(x)sprintf('%.2f',x),num2cell(get(cb,'ytick')),'Un',0);
             set(cb,'yticklabel',newticks);
             cb.Label.String = colorbarlabelstr;
             
             %getcurrentaxes setup XXXX
-            if axis2(end)-axis2(1) < 21;
+            if axis2(end)-axis2(1) < 21
                 set(gca,'XTick',[axis2(1):2:axis2(end)]);
-            elseif rem(axis2(end)-axis2(1),5) == 0;
-                if axis2(end)-axis2(1) < 50;
+            elseif rem(axis2(end)-axis2(1),5) == 0
+                if axis2(end)-axis2(1) < 50
                     set(gca,'XTick',[axis2(1):5:axis2(end)]);
                 end
             end
-            if axis1(end)-axis1(1) < 21;
+            if axis1(end)-axis1(1) < 21
                 set(gca,'YTick',[axis1(1):2:axis1(end)]);
-            elseif rem(axis1(end)-axis1(1),5) == 0;
-                if axis1(end)-axis1(1) < 50;
+            elseif rem(axis1(end)-axis1(1),5) == 0
+                if axis1(end)-axis1(1) < 50
                     set(gca,'YTick',[axis1(1):5:axis1(end)]);
                 end
             end
@@ -297,7 +406,7 @@ classdef beamplot < matlab.apps.AppBase
             
             numofxlines = length(xlines);
             i=1;
-            while i<=numofxlines,
+            while i<=numofxlines
                 line([xlines(i) xlines(i)],[axis1(1) axis1(end)],'Color',linescolor,...
                     'LineWidth',1.5,'LineStyle','--');
                 i = i+1;
@@ -305,20 +414,20 @@ classdef beamplot < matlab.apps.AppBase
             
             numofylines = length(ylines);
             j=1;
-            while j<=numofylines,
+            while j<=numofylines
                 line([axis2(1) axis2(end)],[ylines(j) ylines(j)],'Color',linescolor,...
                     'LineWidth',1.5,'LineStyle','--');
                 j = j+1;
             end
             
             set(gcf,'PaperPositionMode','auto')
-            if saveTIFF;
+            if saveTIFF
                 saveas(gca,fullfile(BP_file_path,figure_title_tiff),'tiff');
             end
-            if savePNG;
+            if savePNG
                 saveas(gca,fullfile(BP_file_path,figure_title_png),'png');
             end
-            if saveFIG;
+            if saveFIG
                 saveas(gca,fullfile(BP_file_path,figure_title_fig),'fig');
             end
             pause(0.4);
@@ -347,12 +456,12 @@ classdef beamplot < matlab.apps.AppBase
             vpp2s = relevant_data(2:end,2:end);
                         
             % XLINES AND YLINES arrays
-            if app.XlinesCheckBox.Value;
+            if app.XlinesCheckBox.Value
                 xlines = str2num(app.Xlinesvar2.Value);
             else
                 xlines = [];
             end
-            if app.YlinesCheckBox2.Value;
+            if app.YlinesCheckBox2.Value
                 ylines = str2num(app.Ylinesvar2.Value);
             else
                 ylines = [];
@@ -367,16 +476,16 @@ classdef beamplot < matlab.apps.AppBase
             %Loads SenslookupHNP0400.txt, SenslookupHNP0200.txt, or
             %SenslookupHNR0500.txt. The text file is 5 tab-delineated columns of
             %values: FREQ_MHZ, SENS_DB, SENS_VPERPA, SENS_V2CM2PERW, and CAP_PF.
-            if app.HPmodel0500.Value;
+            if app.HPmodel0500.Value
                 hpvals = dlmread('SenslookupHNR0500.txt','',1,0);
                 hydrophone_model = 'HNR-0500';
-            elseif app.HPmodel0400old.Value;
+            elseif app.HPmodel0400old.Value
                 hpvals = dlmread('SenslookupHNP0400.txt','',1,0);
                 hydrophone_model = 'HNP-0400 (old)';
-            elseif app.HPmodel0400new.Value;
+            elseif app.HPmodel0400new.Value
                 hpvals = dlmread('SenslookupHNP0400-1430.txt','',1,0);
                 hydrophone_model = 'HNP-0400 (new)';
-            elseif app.HPmodel0200.Value;
+            elseif app.HPmodel0200.Value
                 hpvals = dlmread('SenslookupHNP0200.txt','',1,0);
                 hydrophone_model = 'HNP-0200';
             end
@@ -417,21 +526,21 @@ classdef beamplot < matlab.apps.AppBase
             zacoustic=1.5e10; %impedance of water - includes unit correction for cm
             
             %Pull CAP_PREAMP and GAIN_DB for either high, low, or no gain.
-            if app.gainvallow.Value;
+            if app.gainvallow.Value
                 gaintext = ['Low'];
                 capamp = interp1(pavals(:,1),pavals(:,7),freq_in_mhz_p,'linear');
                 gaindB = interp1(pavals(:,1),pavals(:,5),freq_in_mhz_p,'linear');
                 gain=10.^(gaindB./20); %converting dB to amplitude
                 ml=mc.*gain.*caphydro./(caphydro+capamp);
                 kcalfactor=zacoustic.*(ml).^2;
-            elseif app.gainvalhigh.Value;
+            elseif app.gainvalhigh.Value
                 gaintext = ['High'];
                 capamp = interp1(pavals(:,1),pavals(:,4),freq_in_mhz_p,'linear');
                 gaindB = interp1(pavals(:,1),pavals(:,2),freq_in_mhz_p,'linear');
                 gain=10.^(gaindB./20); %converting dB to amplitude
                 ml=mc.*gain.*caphydro./(caphydro+capamp);
                 kcalfactor=zacoustic.*(ml).^2;
-            elseif app.gainvalnone.Value;
+            elseif app.gainvalnone.Value
                 gaintext = ['No'];
                 capamp = interp1(pavals(:,1),pavals(:,4),freq_in_mhz_p,'linear');
                 gaindB = interp1(pavals(:,1),pavals(:,2),freq_in_mhz_p,'linear');
@@ -457,33 +566,33 @@ classdef beamplot < matlab.apps.AppBase
             warning('off', 'MATLAB:HandleGraphics:ObsoletedProperty:JavaFrame')
             %bpp2(app,app.PressuresCheckBox.Value,app.IntensitiesCheckBox.Value,app.ColorCheckBox.Value,app.BWCheckBox.Value,app.PNGCheckBox.Value,app.TIFFCheckBox.Value,axis1,axis2,intensities,pressures,contours,maxintensity,maxpressure,ylines,xlines,maxval_Xcoord,maxval_Ycoord,graphtitle);
             
-            if app.ColorCheckBox.Value;
-                if app.IntensitiesCheckBox.Value;
+            if app.ColorCheckBox.Value
+                if app.IntensitiesCheckBox.Value
                     makebeamplot(app,'I','color',app.PNGCheckBox.Value,app.TIFFCheckBox.Value,app.FIGcheckbox.Value,axis1,axis2,intensities,app.NumContoursField.Value,app.MaxValuesCheckBox.Value,maxintensity,maxpressure,ylines,xlines,maxval_Xcoord,maxval_Ycoord,graphtitle);
                 end
-                if app.PressuresCheckBox.Value;
+                if app.PressuresCheckBox.Value
                     makebeamplot(app,'P','color',app.PNGCheckBox.Value,app.TIFFCheckBox.Value,app.FIGcheckbox.Value,axis1,axis2,pressures,app.NumContoursField.Value,app.MaxValuesCheckBox.Value,maxintensity,maxpressure,ylines,xlines,maxval_Xcoord,maxval_Ycoord,graphtitle);
                 end
-                if app.NormplotCheckBox.Value;
+                if app.NormplotCheckBox.Value
                     makebeamplot(app,'N','color',app.PNGCheckBox.Value,app.TIFFCheckBox.Value,app.FIGcheckbox.Value,axis1,axis2,normalized,app.NumContoursField.Value,1,maxintensity,maxpressure,ylines,xlines,maxval_Xcoord,maxval_Ycoord,graphtitle);
                 end
-                if app.SurfCheckBox.Value;
+                if app.SurfCheckBox.Value
                     makesurfplot(app,'I','color',app.PNGCheckBox.Value,app.TIFFCheckBox.Value,app.FIGcheckbox.Value,axis1,axis2,intensities,app.NumContoursField.Value,app.MaxValuesCheckBox.Value,maxintensity,maxpressure,ylines,xlines,maxval_Xcoord,maxval_Ycoord,graphtitle);
                 end
                     
             end
-            if app.BWCheckBox.Value;
-                if app.IntensitiesCheckBox.Value;
+            if app.BWCheckBox.Value
+                if app.IntensitiesCheckBox.Value
                     makebeamplot(app,'I','BW',app.PNGCheckBox.Value,app.TIFFCheckBox.Value,app.FIGcheckbox.Value,axis1,axis2,intensities,app.NumContoursField.Value,app.MaxValuesCheckBox.Value,maxintensity,maxpressure,ylines,xlines,maxval_Xcoord,maxval_Ycoord,graphtitle);
                 end
-                if app.PressuresCheckBox.Value;
+                if app.PressuresCheckBox.Value
                     makebeamplot(app,'P','BW',app.PNGCheckBox.Value,app.TIFFCheckBox.Value,app.FIGcheckbox.Value,axis1,axis2,pressures,app.NumContoursField.Value,app.MaxValuesCheckBox.Value,maxintensity,maxpressure,ylines,xlines,maxval_Xcoord,maxval_Ycoord,graphtitle);
                 end
-                if app.NormplotCheckBox.Value;
+                if app.NormplotCheckBox.Value
                     makebeamplot(app,'N','BW',app.PNGCheckBox.Value,app.TIFFCheckBox.Value,app.FIGcheckbox.Value,axis1,axis2,normalized,app.NumContoursField.Value,1,maxintensity,maxpressure,ylines,xlines,maxval_Xcoord,maxval_Ycoord,graphtitle);
                 end
-                if app.SurfCheckBox.Value;
-                    makesurfplot(app,'I','color',app.PNGCheckBox.Value,app.TIFFCheckBox.Value,app.FIGcheckbox.Value,axis1,axis2,intensities,app.NumContoursField.Value,app.MaxValuesCheckBox.Value,maxintensity,maxpressure,ylines,xlines,maxval_Xcoord,maxval_Ycoord,graphtitle);
+                if app.SurfCheckBox.Value
+                    makesurfplot(app,'I','BW',app.PNGCheckBox.Value,app.TIFFCheckBox.Value,app.FIGcheckbox.Value,axis1,axis2,intensities,app.NumContoursField.Value,app.MaxValuesCheckBox.Value,maxintensity,maxpressure,ylines,xlines,maxval_Xcoord,maxval_Ycoord,graphtitle);
                 end
             end
 
@@ -492,11 +601,11 @@ classdef beamplot < matlab.apps.AppBase
         % Button pushed function: OpenBPButton
         function OpenBPButtonButtonPushed(app, event)
             persistent parentfolder;
-            if isempty(parentfolder);
+            if isempty(parentfolder)
                 [filename, pathname] = uigetfile('*.*', 'Select Plot File', 'MultiSelect', 'off');
                 app.UIFigure.Visible = 'off';
                 app.UIFigure.Visible = 'on';
-                if pathname == 0;
+                if pathname == 0
                     return
                 else
                     idcs = strfind(pathname,'\');
@@ -513,7 +622,7 @@ classdef beamplot < matlab.apps.AppBase
                 [filename, pathname] = uigetfile(openparent, 'Select Plot File', 'MultiSelect', 'off');
                 app.UIFigure.Visible = 'off';
                 app.UIFigure.Visible = 'on';
-                if pathname == 0;
+                if pathname == 0
                     return
                 else
                     idcs = strfind(pathname,'\');
@@ -528,7 +637,7 @@ classdef beamplot < matlab.apps.AppBase
             end
             
             [~,~,fileext] = fileparts(filename);
-            if strcmp(fileext,'.xlsx');
+            if strcmp(fileext,'.xlsx')
                 reldata2 = xlsread(fullfile(pathname,filename)); 
                 reldata = transpose(reldata2(3:end,1:end)); %reads voltage data from file (and axis1/axis2 coords)
                 reldata(1) = 0;
@@ -568,37 +677,39 @@ classdef beamplot < matlab.apps.AppBase
                     app.GraphTitleField.Value = filename;
                 else
                     app.instructionText.Value = 'Scan parameters loaded from file, please verify accuracy.';
-                    if strcmp(IDarraytrunc(4),'HNR-0500');
+                    if strcmp(IDarraytrunc(4),'HNR-0500')
                         app.HPmodel0500.Value = 1;
                         set(app.gainvalnone,'enable','on');
-                    elseif strcmp(IDarraytrunc(4),'HNP-0400') || strcmp(IDarraytrunc(4),'HNP-0400 (old)');
+                    elseif strcmp(IDarraytrunc(4),'HNP-0400') || strcmp(IDarraytrunc(4),'HNP-0400 (old)')
                     %elseif strcmp(IDarraytrunc(4),'HNP-0400 (old)');
                         app.HPmodel0400old.Value = 1;
                         app.gainvalhigh.Value = 1;
                         set(app.gainvalnone,'enable','off')
-                    elseif strcmp(IDarraytrunc(4),'HNP-0400 (new)');
+                    elseif strcmp(IDarraytrunc(4),'HNP-0400 (new)')
                         app.HPmodel0400new.Value = 1;
                         app.gainvalhigh.Value = 1;
                         set(app.gainvalnone,'enable','off')
-                    elseif strcmp(IDarraytrunc(4),'HNP-0200');
+                    elseif strcmp(IDarraytrunc(4),'HNP-0200')
                         app.HPmodel0200.Value = 1;
                         app.gainvalhigh.Value = 1;
                         set(app.gainvalnone,'enable','off')
                     end
                     
-                    if strcmp(IDarraytrunc(6),'High');
+                    if strcmp(IDarraytrunc(6),'High')
                         app.gainvalhigh.Value = 1;
-                    elseif strcmp(IDarraytrunc(6),'Low');
+                    elseif strcmp(IDarraytrunc(6),'Low')
                         app.gainvallow.Value = 1;
-                    elseif strcmp(IDarraytrunc(6),'None');
+                    elseif strcmp(IDarraytrunc(6),'None')
                         app.gainvalnone.Value = 1;
                     end
+                    
+                    [filepath,name,ext] = fileparts(filename);
                     
                     app.Xoffsetvar.Value = cellfun(@str2num, IDarraytrunc(18));
                     app.Yoffsetvar.Value = cellfun(@str2num, IDarraytrunc(16));
                     app.freq_in_mhz_input.Value = cellfun(@str2num, IDarraytrunc(10));
                     transducerID = char(IDarraytrunc(2));
-                    graphtitlestr = [transducerID,'—',filename];
+                    graphtitlestr = [transducerID,' — ',name];
                     app.GraphTitleField.Value = graphtitlestr;
                 end
                 
@@ -612,7 +723,7 @@ classdef beamplot < matlab.apps.AppBase
         % Value changed function: XlinesCheckBox
         function XlinesCheckBoxValueChanged(app, event)
             value = app.XlinesCheckBox.Value;
-            if app.XlinesCheckBox.Value;
+            if app.XlinesCheckBox.Value
                 set(app.Xlinesvar2,'enable','on');
             else
                 set(app.Xlinesvar2,'enable','off');
@@ -622,7 +733,7 @@ classdef beamplot < matlab.apps.AppBase
         % Value changed function: YlinesCheckBox2
         function YlinesCheckBox2ValueChanged(app, event)
             value = app.YlinesCheckBox2.Value;
-            if app.YlinesCheckBox2.Value;
+            if app.YlinesCheckBox2.Value
                 set(app.Ylinesvar2,'enable','on');
             else
                 set(app.Ylinesvar2,'enable','off');
@@ -632,16 +743,16 @@ classdef beamplot < matlab.apps.AppBase
         % Selection changed function: HPmodel
         function HPmodelSelectionChanged(app, event)
             selectedButton = app.HPmodel.SelectedObject;
-            if app.HPmodel0200.Value;
+            if app.HPmodel0200.Value
                 app.gainvalhigh.Value = 1;
                 set(app.gainvalnone,'enable','off');
-            elseif app.HPmodel0400old.Value;
+            elseif app.HPmodel0400old.Value
                 app.gainvalhigh.Value = 1;
                 set(app.gainvalnone,'enable','off');
-            elseif app.HPmodel0400new.Value;
+            elseif app.HPmodel0400new.Value
                 app.gainvalhigh.Value = 1;
                 set(app.gainvalnone,'enable','off');
-            elseif app.HPmodel0500.Value;
+            elseif app.HPmodel0500.Value
                 set(app.gainvalnone,'enable','on');
             end
             
@@ -715,7 +826,7 @@ classdef beamplot < matlab.apps.AppBase
             
         end
 
-        % Callback function
+        % Value changed function: Xlinesvar2
         function ButtonButtonPushed(app, event)
 % 
         end
@@ -749,6 +860,80 @@ classdef beamplot < matlab.apps.AppBase
             app.IntensityScalingFactor.Value = pressscalevalue^2;
             
         end
+
+        % Value changed function: NumContoursField
+        function NumContoursFieldValueChanged(app, event)
+            NumContoursValue = app.NumContoursField.Value;
+            app.PercentContoursField.Value = 100/(NumContoursValue+1);
+        end
+
+        % Value changed function: PercentContoursField
+        function PercentContoursFieldValueChanged(app, event)
+            PercentContoursValue = app.PercentContoursField.Value;
+            app.NumContoursField.Value = round((100/PercentContoursValue)-1);
+            NumContoursValue = app.NumContoursField.Value;
+            app.PercentContoursField.Value = 100/(NumContoursValue+1);
+        end
+
+        % Value changed function: Tracepercentcontourvalue
+        function TracepercentcontourvalueValueChanged(app, event)
+            value = app.Tracepercentcontourvalue.Value;
+            
+        end
+
+        % Value changed function: TracepercentcontourCheckBox
+        function TracepercentcontourCheckBoxValueChanged(app, event)
+            value = app.TracepercentcontourCheckBox.Value;
+            if app.TracepercentcontourCheckBox.Value;
+                set(app.Tracepercentcontourvalue,'enable','on');
+            else
+                set(app.Tracepercentcontourvalue,'enable','off');
+            end  
+        end
+
+        % Value changed function: CustomPlotLimitsCheckBox
+        function CustomPlotLimitsCheckBoxValueChanged(app, event)
+            value = app.CustomPlotLimitsCheckBox.Value;
+            if app.CustomPlotLimitsCheckBox.Value;
+                set(app.IntensityLimitLow,'enable','on');
+                set(app.IntensityLimitHigh,'enable','on');
+                set(app.PressureLimitLow,'enable','on');
+                set(app.PressureLimitHigh,'enable','on');
+            else
+                app.IntensityLimitLow.Value = 0;
+                app.IntensityLimitHigh.Value = 1;
+                app.PressureLimitLow.Value = 0;
+                app.PressureLimitHigh.Value = 0.1732;
+                set(app.IntensityLimitLow,'enable','off');
+                set(app.IntensityLimitHigh,'enable','off');
+                set(app.PressureLimitLow,'enable','off');
+                set(app.PressureLimitHigh,'enable','off');
+            end  
+        end
+
+        % Value changed function: IntensityLimitLow
+        function IntensityLimitLowValueChanged(app, event)
+            IntensityLimitLow = app.IntensityLimitLow.Value;
+            app.PressureLimitLow.Value = sqrt(IntensityLimitLow.*(10000*2*1500*1000))./(1e6);
+        end
+
+        % Value changed function: IntensityLimitHigh
+        function IntensityLimitHighValueChanged(app, event)
+            IntensityLimitHigh = app.IntensityLimitHigh.Value;
+            app.PressureLimitHigh.Value = sqrt(IntensityLimitHigh.*(10000*2*1500*1000))./(1e6);
+        end
+
+        % Value changed function: PressureLimitLow
+        function PressureLimitLowValueChanged(app, event)
+            PressureLimitLow = app.PressureLimitLow.Value;
+            app.IntensityLimitLow.Value = ((PressureLimitLow*1e6).^2)/(10000*2*1500*1000);
+        end
+
+        % Value changed function: PressureLimitHigh
+        function PressureLimitHighValueChanged(app, event)
+            PressureLimitHigh = app.PressureLimitHigh.Value;
+            app.IntensityLimitHigh.Value = ((PressureLimitHigh*1e6).^2)/(10000*2*1500*1000);
+        end
     end
 
     % App initialization and construction
@@ -760,7 +945,7 @@ classdef beamplot < matlab.apps.AppBase
             % Create UIFigure
             app.UIFigure = uifigure;
             app.UIFigure.Position = [101 101 573 657];
-            app.UIFigure.Name = 'Beam Plot Generator v1.4';
+            app.UIFigure.Name = 'Beam Plot Generator v1.6';
 
             % Create TabGroup
             app.TabGroup = uitabgroup(app.UIFigure);
@@ -768,7 +953,7 @@ classdef beamplot < matlab.apps.AppBase
 
             % Create Tab
             app.Tab = uitab(app.TabGroup);
-            app.Tab.Title = 'Generate Beam Plot';
+            app.Tab.Title = 'Beam Plot';
 
             % Create OpenBPButton
             app.OpenBPButton = uibutton(app.Tab, 'push');
@@ -857,20 +1042,20 @@ classdef beamplot < matlab.apps.AppBase
             % Create ColorCheckBox
             app.ColorCheckBox = uicheckbox(app.Tab);
             app.ColorCheckBox.Text = 'Color:';
-            app.ColorCheckBox.Position = [110 285 52 16];
+            app.ColorCheckBox.Position = [111 256 52 16];
             app.ColorCheckBox.Value = true;
 
             % Create BWCheckBox
             app.BWCheckBox = uicheckbox(app.Tab);
             app.BWCheckBox.Text = 'Black and white';
-            app.BWCheckBox.Position = [110 255 105 16];
+            app.BWCheckBox.Position = [111 226 105 16];
 
             % Create colormapdrop
             app.colormapdrop = uidropdown(app.Tab);
             app.colormapdrop.Items = {'parula', 'jet', 'hsv', 'hot', 'cool', 'spring', 'summer', 'autumn', 'winter', 'gray', 'bone', 'copper', 'pink', 'lines', 'colorcube', 'prism', 'flag', 'white'};
             app.colormapdrop.FontSize = 10;
             app.colormapdrop.BackgroundColor = [1 1 1];
-            app.colormapdrop.Position = [168 283 48 20];
+            app.colormapdrop.Position = [169 254 48 20];
             app.colormapdrop.Value = 'parula';
 
             % Create IntensitiesCheckBox
@@ -968,16 +1153,17 @@ classdef beamplot < matlab.apps.AppBase
             app.Yoffsetvar.Limits = [-500 500];
             app.Yoffsetvar.Position = [166 406 46 22];
 
-            % Create Label5
-            app.Label5 = uilabel(app.Tab);
-            app.Label5.HorizontalAlignment = 'right';
-            app.Label5.VerticalAlignment = 'top';
-            app.Label5.Position = [110 318 53 15];
-            app.Label5.Text = 'Contours:';
+            % Create ContoursLabel_2
+            app.ContoursLabel_2 = uilabel(app.Tab);
+            app.ContoursLabel_2.HorizontalAlignment = 'right';
+            app.ContoursLabel_2.VerticalAlignment = 'top';
+            app.ContoursLabel_2.Position = [95 311 68 22];
+            app.ContoursLabel_2.Text = '# Contours:';
 
             % Create NumContoursField
             app.NumContoursField = uieditfield(app.Tab, 'numeric');
             app.NumContoursField.Limits = [0 500];
+            app.NumContoursField.ValueChangedFcn = createCallbackFcn(app, @NumContoursFieldValueChanged, true);
             app.NumContoursField.Position = [169 314 48 22];
             app.NumContoursField.Value = 9;
 
@@ -992,9 +1178,23 @@ classdef beamplot < matlab.apps.AppBase
             app.GraphTitleField = uieditfield(app.Tab, 'text');
             app.GraphTitleField.Position = [179 174 360 22];
 
+            % Create ContoursLabel
+            app.ContoursLabel = uilabel(app.Tab);
+            app.ContoursLabel.HorizontalAlignment = 'right';
+            app.ContoursLabel.VerticalAlignment = 'top';
+            app.ContoursLabel.Position = [91 280 72 22];
+            app.ContoursLabel.Text = '% Contours:';
+
+            % Create PercentContoursField
+            app.PercentContoursField = uieditfield(app.Tab, 'numeric');
+            app.PercentContoursField.Limits = [0 500];
+            app.PercentContoursField.ValueChangedFcn = createCallbackFcn(app, @PercentContoursFieldValueChanged, true);
+            app.PercentContoursField.Position = [169 283 48 22];
+            app.PercentContoursField.Value = 10;
+
             % Create Tab2
             app.Tab2 = uitab(app.TabGroup);
-            app.Tab2.Title = 'Advanced Settings';
+            app.Tab2.Title = 'Settings';
 
             % Create XlinesCheckBox
             app.XlinesCheckBox = uicheckbox(app.Tab2);
@@ -1019,27 +1219,28 @@ classdef beamplot < matlab.apps.AppBase
             app.Ylinesvar2 = uieditfield(app.Tab2, 'text');
             app.Ylinesvar2.Enable = 'off';
             app.Ylinesvar2.Position = [231 510 61 22];
+            app.Ylinesvar2.Value = '0';
 
-            % Create LabelDropDown
-            app.LabelDropDown = uilabel(app.Tab2);
-            app.LabelDropDown.HorizontalAlignment = 'right';
-            app.LabelDropDown.VerticalAlignment = 'top';
-            app.LabelDropDown.Position = [36 380 114 15];
-            app.LabelDropDown.Text = 'Contour line color:';
+            % Create ContourplotlinecolorLabel
+            app.ContourplotlinecolorLabel = uilabel(app.Tab2);
+            app.ContourplotlinecolorLabel.HorizontalAlignment = 'right';
+            app.ContourplotlinecolorLabel.VerticalAlignment = 'top';
+            app.ContourplotlinecolorLabel.Position = [47 346 126 22];
+            app.ContourplotlinecolorLabel.Text = 'Contour plot line color:';
 
             % Create contourcolordrop
             app.contourcolordrop = uidropdown(app.Tab2);
             app.contourcolordrop.Items = {'Black', 'White', 'None'};
             app.contourcolordrop.FontSize = 10;
             app.contourcolordrop.BackgroundColor = [1 1 1];
-            app.contourcolordrop.Position = [157 377 48 20];
+            app.contourcolordrop.Position = [184 350 48 20];
             app.contourcolordrop.Value = 'Black';
 
             % Create MaxValuesCheckBox
             app.MaxValuesCheckBox = uicheckbox(app.Tab2);
             app.MaxValuesCheckBox.ValueChangedFcn = createCallbackFcn(app, @MaxValuesCheckBoxValueChanged, true);
-            app.MaxValuesCheckBox.Text = '  Print Maximum Values on Plot';
-            app.MaxValuesCheckBox.Position = [53 477 190 22];
+            app.MaxValuesCheckBox.Text = '  Print Maximum Values on Plots';
+            app.MaxValuesCheckBox.Position = [53 449 196 22];
 
             % Create LabelEditField2
             app.LabelEditField2 = uilabel(app.Tab2);
@@ -1050,32 +1251,128 @@ classdef beamplot < matlab.apps.AppBase
 
             % Create Xlinesvar2
             app.Xlinesvar2 = uieditfield(app.Tab2, 'text');
+            app.Xlinesvar2.ValueChangedFcn = createCallbackFcn(app, @ButtonButtonPushed, true);
             app.Xlinesvar2.Enable = 'off';
             app.Xlinesvar2.Position = [231 542 61 22];
+            app.Xlinesvar2.Value = '0';
 
-            % Create IntensityScalingFactorEditFieldLabel
-            app.IntensityScalingFactorEditFieldLabel = uilabel(app.Tab2);
-            app.IntensityScalingFactorEditFieldLabel.HorizontalAlignment = 'right';
-            app.IntensityScalingFactorEditFieldLabel.Position = [48 444 130 22];
-            app.IntensityScalingFactorEditFieldLabel.Text = 'Intensity Scaling Factor';
+            % Create IntensityScalingFactorLabel
+            app.IntensityScalingFactorLabel = uilabel(app.Tab2);
+            app.IntensityScalingFactorLabel.HorizontalAlignment = 'right';
+            app.IntensityScalingFactorLabel.Position = [47 415 134 22];
+            app.IntensityScalingFactorLabel.Text = 'Intensity Scaling Factor:';
 
             % Create IntensityScalingFactor
             app.IntensityScalingFactor = uieditfield(app.Tab2, 'numeric');
             app.IntensityScalingFactor.ValueChangedFcn = createCallbackFcn(app, @IntensityScalingFactorValueChanged, true);
-            app.IntensityScalingFactor.Position = [193 444 39 22];
+            app.IntensityScalingFactor.Position = [192 415 39 22];
             app.IntensityScalingFactor.Value = 1;
 
             % Create PressureScalingFactorLabel
             app.PressureScalingFactorLabel = uilabel(app.Tab2);
             app.PressureScalingFactorLabel.HorizontalAlignment = 'right';
-            app.PressureScalingFactorLabel.Position = [47 412 134 22];
-            app.PressureScalingFactorLabel.Text = 'Pressure Scaling Factor';
+            app.PressureScalingFactorLabel.Position = [47 383 137 22];
+            app.PressureScalingFactorLabel.Text = 'Pressure Scaling Factor:';
 
             % Create PressureScalingFactor
             app.PressureScalingFactor = uieditfield(app.Tab2, 'numeric');
             app.PressureScalingFactor.ValueChangedFcn = createCallbackFcn(app, @PressureScalingFactorValueChanged, true);
-            app.PressureScalingFactor.Position = [193 412 39 22];
+            app.PressureScalingFactor.Position = [192 383 39 22];
             app.PressureScalingFactor.Value = 1;
+
+            % Create SurfaceplotlinecolorLabel
+            app.SurfaceplotlinecolorLabel = uilabel(app.Tab2);
+            app.SurfaceplotlinecolorLabel.HorizontalAlignment = 'right';
+            app.SurfaceplotlinecolorLabel.VerticalAlignment = 'top';
+            app.SurfaceplotlinecolorLabel.Position = [48 314 124 22];
+            app.SurfaceplotlinecolorLabel.Text = 'Surface plot line color:';
+
+            % Create surflinecolordrop
+            app.surflinecolordrop = uidropdown(app.Tab2);
+            app.surflinecolordrop.Items = {'Black', 'White', 'None'};
+            app.surflinecolordrop.FontSize = 10;
+            app.surflinecolordrop.BackgroundColor = [1 1 1];
+            app.surflinecolordrop.Position = [184 318 48 20];
+            app.surflinecolordrop.Value = 'Black';
+
+            % Create TracepercentcontourCheckBox
+            app.TracepercentcontourCheckBox = uicheckbox(app.Tab2);
+            app.TracepercentcontourCheckBox.ValueChangedFcn = createCallbackFcn(app, @TracepercentcontourCheckBoxValueChanged, true);
+            app.TracepercentcontourCheckBox.Text = '  Trace          % contour';
+            app.TracepercentcontourCheckBox.Position = [53 480 146 22];
+
+            % Create Tracepercentcontourvalue
+            app.Tracepercentcontourvalue = uieditfield(app.Tab2, 'numeric');
+            app.Tracepercentcontourvalue.ValueChangedFcn = createCallbackFcn(app, @TracepercentcontourvalueValueChanged, true);
+            app.Tracepercentcontourvalue.Enable = 'off';
+            app.Tracepercentcontourvalue.Position = [112 480 28 22];
+            app.Tracepercentcontourvalue.Value = 50;
+
+            % Create IntensityEditFieldLabel
+            app.IntensityEditFieldLabel = uilabel(app.Tab2);
+            app.IntensityEditFieldLabel.HorizontalAlignment = 'right';
+            app.IntensityEditFieldLabel.Position = [69 257 54 22];
+            app.IntensityEditFieldLabel.Text = 'Intensity:';
+
+            % Create IntensityLimitLow
+            app.IntensityLimitLow = uieditfield(app.Tab2, 'numeric');
+            app.IntensityLimitLow.ValueChangedFcn = createCallbackFcn(app, @IntensityLimitLowValueChanged, true);
+            app.IntensityLimitLow.Enable = 'off';
+            app.IntensityLimitLow.Position = [134 257 54 22];
+
+            % Create toEditFieldLabel
+            app.toEditFieldLabel = uilabel(app.Tab2);
+            app.toEditFieldLabel.HorizontalAlignment = 'right';
+            app.toEditFieldLabel.Position = [180 257 24 22];
+            app.toEditFieldLabel.Text = 'to';
+
+            % Create IntensityLimitHigh
+            app.IntensityLimitHigh = uieditfield(app.Tab2, 'numeric');
+            app.IntensityLimitHigh.ValueChangedFcn = createCallbackFcn(app, @IntensityLimitHighValueChanged, true);
+            app.IntensityLimitHigh.Enable = 'off';
+            app.IntensityLimitHigh.Position = [212 257 54 22];
+            app.IntensityLimitHigh.Value = 1;
+
+            % Create WcmLabel
+            app.WcmLabel = uilabel(app.Tab2);
+            app.WcmLabel.Position = [276 257 40 22];
+            app.WcmLabel.Text = 'W/cm²';
+
+            % Create MPaLabel
+            app.MPaLabel = uilabel(app.Tab2);
+            app.MPaLabel.Position = [276 228 30 22];
+            app.MPaLabel.Text = 'MPa';
+
+            % Create PressureEditFieldLabel
+            app.PressureEditFieldLabel = uilabel(app.Tab2);
+            app.PressureEditFieldLabel.HorizontalAlignment = 'right';
+            app.PressureEditFieldLabel.Position = [69 228 57 22];
+            app.PressureEditFieldLabel.Text = 'Pressure:';
+
+            % Create PressureLimitLow
+            app.PressureLimitLow = uieditfield(app.Tab2, 'numeric');
+            app.PressureLimitLow.ValueChangedFcn = createCallbackFcn(app, @PressureLimitLowValueChanged, true);
+            app.PressureLimitLow.Enable = 'off';
+            app.PressureLimitLow.Position = [134 228 54 22];
+
+            % Create toEditField_2Label
+            app.toEditField_2Label = uilabel(app.Tab2);
+            app.toEditField_2Label.HorizontalAlignment = 'right';
+            app.toEditField_2Label.Position = [179 228 25 22];
+            app.toEditField_2Label.Text = 'to';
+
+            % Create PressureLimitHigh
+            app.PressureLimitHigh = uieditfield(app.Tab2, 'numeric');
+            app.PressureLimitHigh.ValueChangedFcn = createCallbackFcn(app, @PressureLimitHighValueChanged, true);
+            app.PressureLimitHigh.Enable = 'off';
+            app.PressureLimitHigh.Position = [212 228 54 22];
+            app.PressureLimitHigh.Value = 0.1732;
+
+            % Create CustomPlotLimitsCheckBox
+            app.CustomPlotLimitsCheckBox = uicheckbox(app.Tab2);
+            app.CustomPlotLimitsCheckBox.ValueChangedFcn = createCallbackFcn(app, @CustomPlotLimitsCheckBoxValueChanged, true);
+            app.CustomPlotLimitsCheckBox.Text = ' Custom Plot Limits:';
+            app.CustomPlotLimitsCheckBox.Position = [53 283 129 22];
 
             % Create Tab3
             app.Tab3 = uitab(app.TabGroup);
@@ -1085,7 +1382,7 @@ classdef beamplot < matlab.apps.AppBase
             app.TextArea = uitextarea(app.Tab3);
             app.TextArea.BackgroundColor = [0.9373 0.9373 0.9373];
             app.TextArea.Position = [1 2 571 596];
-            app.TextArea.Value = {'Requires lookup tables for the four hydrophones and the preamp.'; ''; 'Select "Open File" and choose a beam plot output file from Labview (.bmplt). If the file contains scan '; 'parameters, they will be loaded automatically and the dialog will confirm. Cannot open files from a root directory (i.e. directly on a flash drive, must be in a folder).'; ''; '"Offset" will introduce an offset to the axes labeling. For example, if a scan began 10 mm from the '; 'transducer, an X offset of 10 will start the graph X-axis at 10 mm. Negative values accepted.'; ''; '9 contours = 10% contours.'; ''; 'Choosing "X lines" or "Y lines" allows drawing of vertical and horizontal lines. Enter values, comma '; 'separated, and lines will be printed at that value on the chosen axis.'; ''; 'For illustrations of the MATLAB-supported colormaps, see: '; 'https://www.mathworks.com/help/matlab/ref/colormap.html'; ''; 'Images are saved to the same folder where the beam plot spreadsheet file was opened from, and '; 'will overwrite older image files without notice.'; ''; ''; 'Changelog:'; 'v1.4: added custom scaling input, fixed surface plotting (open figure and correct scaling). Still needs: P surface option, ability to set arb graph limits for sxs comparisons.'};
+            app.TextArea.Value = {'Requires lookup tables for the four hydrophones and the preamp.'; ''; 'Select "Open File" and choose a beam plot output file from Labview (.bmplt). If the file contains scan '; 'parameters, they will be loaded automatically and the dialog will confirm. Cannot open files from a root directory (i.e. directly on a flash drive, must be in a folder).'; ''; '"Offset" will introduce an offset to the axes labeling. For example, if a scan began 10 mm from the '; 'transducer, an X offset of 10 will start the graph X-axis at 10 mm. Negative values accepted.'; ''; 'Choosing "X lines" or "Y lines" allows drawing of vertical and horizontal lines. Enter values, comma '; 'separated, and lines will be printed at that value on the chosen axis.'; ''; 'Custom plot limit examples:'; ' - Set max value just under the absolute maximum across all plots you want to compare. For example, if the maximum intensity across 5 different plots is 5.87 W/cm², set custom max to 5.86 to ensure you catch the high value, and then all 5 plots will have color-coordinated contours for direct comparison.'; ' - Set max value low to highlight all areas above that value. For example, set the maximum limit to 1 W/cm² and everything above that will be colored in the highest value.'; ''; 'For illustrations of the MATLAB-supported colormaps, see: '; 'https://www.mathworks.com/help/matlab/ref/colormap.html'; ''; 'Images are saved to the same folder where the beam plot spreadsheet file was opened from, and '; 'will overwrite older image files without notice.'; ''; ''; ''; ''; 'Changelog:'; 'v1.4: Added custom scaling input for hydrophone correction, fixed surface plotting (open figure and correct scaling).'; ''; 'v1.5: Generates all contours correctly, color is filled correctly. Now traces any % contour.'; ''; 'v1.6: Arbitrary graph limits added for direct comparisons. All colormaps supported. Needs Psurf.'};
 
             % Create TextArea2
             app.TextArea2 = uitextarea(app.Tab3);
@@ -1093,7 +1390,7 @@ classdef beamplot < matlab.apps.AppBase
             app.TextArea2.FontWeight = 'bold';
             app.TextArea2.BackgroundColor = [0.9373 0.9373 0.9373];
             app.TextArea2.Position = [1 597 571 39];
-            app.TextArea2.Value = {'Version 1.4 - 03/22/19'};
+            app.TextArea2.Value = {'Version 1.6 - 04/02/19'};
         end
     end
 
